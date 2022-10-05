@@ -31,3 +31,9 @@ model/job.js
 -cors
 -xss-clean
 -express-rate-limit
+
+## sSwagger
+
+export the Api from postman .
+use apimatic to chnage format
+https://www.apimatic.io/
