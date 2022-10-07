@@ -35,5 +35,10 @@ model/job.js
 ## sSwagger
 
 export the Api from postman .
-use apimatic to chnage format
+use apimatic to change format
 https://www.apimatic.io/
+
+in apimatic export the json collecion from postman
+modify group and skip auth where it is not required.
+
+then export API (OPEN APi 3.0(YAML))
