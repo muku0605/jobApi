@@ -1,8 +1,8 @@
 require("dotenv").config();
 require("express-async-errors");
-
 const express = require("express");
 const app = express();
+const path = require("path");
 //extra security package
 
 const helmet = require("helmet");
@@ -28,6 +28,8 @@ const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
 app.set("trust proxy", 1);
+//static middleware
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.use(
   rateLimiter({
     windowMs: 15 * 60 * 1000,
@@ -47,6 +49,11 @@ app.use("api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 //routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
+
+//server index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
